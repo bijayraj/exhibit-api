@@ -1,0 +1,92 @@
+components:
+    schemas:
+        Artwork_assetCreate:
+            type: object
+            properties:
+                description:
+                    type: string
+                address:
+                    type: string
+                assetType:
+                    type: number
+                    format: float
+                visible:
+                    type: boolean
+            required:
+                - description
+                - address
+                - assetType
+            additionalProperties: false
+        ArtworkCreate:
+            type: object
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+                artType:
+                    type: string
+                moreInfo:
+                    type: string
+            required:
+                - title
+            additionalProperties: false
+        ExhibitCreate:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+                addressLine:
+                    type: string
+                details:
+                    type: string
+                visible:
+                    type: boolean
+                startDate:
+                    type: string
+                    format: date-time
+                endDate:
+                    type: string
+                    format: date-time
+                moreInfo:
+                    type: string
+            required:
+                - name
+                - details
+                - startDate
+            additionalProperties: false
+        MemberCreate:
+            type: object
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                firstNameNepali:
+                    type: string
+                lastNameNepali:
+                    type: string
+                startDate:
+                    type: string
+                    format: date-time
+                endDate:
+                    type: string
+                    format: date-time
+                dob:
+                    type: string
+                    format: date-time
+                photoUrl:
+                    type: string
+                description:
+                    type: string
+                email:
+                    type: string
+                    format: email
+            required:
+                - firstName
+                - lastName
+                - dob
+                - email
+            additionalProperties: false

@@ -1,0 +1,449 @@
+{
+    "tables": {
+        "artwork_assets": {
+            "tableName": "artwork_assets",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "description": {
+                    "allowNull": false,
+                    "field": "description",
+                    "seqType": "Sequelize.STRING"
+                },
+                "address": {
+                    "allowNull": false,
+                    "field": "address",
+                    "seqType": "Sequelize.STRING"
+                },
+                "assetType": {
+                    "field": "asset_type",
+                    "seqType": "Sequelize.ENUM('0', '1', '2')"
+                },
+                "visible": {
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "visible",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "approved": {
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "approved",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "approvedDate": {
+                    "field": "approved_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "ArtworkId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "artworks",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "artwork_id",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "artworks": {
+            "tableName": "artworks",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "title": {
+                    "allowNull": false,
+                    "field": "title",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "allowNull": false,
+                    "field": "description",
+                    "seqType": "Sequelize.STRING"
+                },
+                "artType": {
+                    "field": "art_type",
+                    "seqType": "Sequelize.STRING"
+                },
+                "moreInfo": {
+                    "field": "more_info",
+                    "seqType": "Sequelize.STRING"
+                },
+                "approved": {
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "approved",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "approvedDate": {
+                    "field": "approved_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "ExhibitId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "exhibits",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "exhibit_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "user_id",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "exhibit_admins": {
+            "tableName": "exhibit_admins",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "expiryDate": {
+                    "field": "expiry_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "user_id",
+                    "unique": "exhibit_admins_UserId_ExhibitId_unique",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "ExhibitId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "exhibits",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "exhibit_id",
+                    "unique": "exhibit_admins_UserId_ExhibitId_unique",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "exhibits": {
+            "tableName": "exhibits",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "allowNull": false,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "allowNull": false,
+                    "field": "description",
+                    "seqType": "Sequelize.STRING"
+                },
+                "location": {
+                    "field": "location",
+                    "seqType": "Sequelize.STRING"
+                },
+                "address": {
+                    "field": "address",
+                    "seqType": "Sequelize.STRING"
+                },
+                "visible": {
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "visible",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "startDate": {
+                    "allowNull": false,
+                    "field": "start_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "endDate": {
+                    "field": "end_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "moreInfo": {
+                    "field": "more_info",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "members": {
+            "tableName": "members",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "firstName": {
+                    "field": "first_name",
+                    "allowNull": false,
+                    "seqType": "Sequelize.STRING"
+                },
+                "lastName": {
+                    "field": "last_name",
+                    "allowNull": false,
+                    "seqType": "Sequelize.STRING"
+                },
+                "firstNameNepali": {
+                    "field": "first_name_nepali",
+                    "seqType": "Sequelize.STRING"
+                },
+                "lastNameNepali": {
+                    "field": "last_name_nepali",
+                    "seqType": "Sequelize.STRING"
+                },
+                "dob": {
+                    "field": "dob",
+                    "seqType": "Sequelize.DATEONLY"
+                },
+                "startDate": {
+                    "field": "start_date",
+                    "seqType": "Sequelize.DATEONLY"
+                },
+                "endDate": {
+                    "field": "end_date",
+                    "seqType": "Sequelize.DATEONLY"
+                },
+                "photoUrl": {
+                    "field": "photo_url",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "field": "description",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "email": {
+                    "unique": true,
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "refresh_tokens": {
+            "tableName": "refresh_tokens",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "token": {
+                    "field": "token",
+                    "seqType": "Sequelize.STRING"
+                },
+                "expiryDate": {
+                    "field": "expiry_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "createdByIp": {
+                    "field": "created_by_ip",
+                    "seqType": "Sequelize.STRING"
+                },
+                "revokedDate": {
+                    "field": "revoked_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "revokedByIp": {
+                    "field": "revoked_by_ip",
+                    "seqType": "Sequelize.STRING"
+                },
+                "replacedByToken": {
+                    "field": "replaced_by_token",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "user_id",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "users": {
+            "tableName": "users",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "username": {
+                    "allowNull": false,
+                    "unique": true,
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "allowNull": false,
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "memberId": {
+                    "field": "member_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "firstName": {
+                    "field": "first_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "lastName": {
+                    "field": "last_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "organization": {
+                    "field": "organization",
+                    "seqType": "Sequelize.STRING"
+                },
+                "occupation": {
+                    "field": "occupation",
+                    "seqType": "Sequelize.STRING"
+                },
+                "photoUrl": {
+                    "field": "photo_url",
+                    "seqType": "Sequelize.STRING"
+                },
+                "role": {
+                    "field": "role",
+                    "seqType": "Sequelize.STRING"
+                },
+                "verificationToken": {
+                    "field": "verification_token",
+                    "seqType": "Sequelize.STRING"
+                },
+                "resetToken": {
+                    "field": "reset_token",
+                    "seqType": "Sequelize.STRING"
+                },
+                "resetTokenExpiry": {
+                    "field": "reset_token_expiry",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 2
+}

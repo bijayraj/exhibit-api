@@ -1,0 +1,396 @@
+components:
+    schemas:
+        ArtworkAsset:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                description:
+                    type: string
+                    maxLength: 255
+                address:
+                    type: string
+                    maxLength: 255
+                assetType:
+                    type:
+                        - string
+                        - 'null'
+                    enum:
+                        - 0
+                        - 1
+                        - 2
+                visible:
+                    type:
+                        - boolean
+                        - 'null'
+                approved:
+                    type:
+                        - boolean
+                        - 'null'
+                approvedDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                Artwork:
+                    $ref: '#/components/schemas/Artwork'
+            required:
+                - description
+                - address
+                - created_at
+                - updated_at
+        Artwork:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                title:
+                    type: string
+                    maxLength: 255
+                description:
+                    type: string
+                    maxLength: 255
+                artType:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                moreInfo:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                approved:
+                    type:
+                        - boolean
+                        - 'null'
+                approvedDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                Exhibit:
+                    $ref: '#/components/schemas/Exhibit'
+                User:
+                    $ref: '#/components/schemas/User'
+                ArtworkAssets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ArtworkAsset'
+            required:
+                - title
+                - description
+                - created_at
+                - updated_at
+        ExhibitAdmin:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                expiryDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                User:
+                    $ref: '#/components/schemas/User'
+                Exhibit:
+                    $ref: '#/components/schemas/Exhibit'
+            required:
+                - created_at
+                - updated_at
+        Exhibit:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                name:
+                    type: string
+                    maxLength: 255
+                description:
+                    type: string
+                    maxLength: 255
+                location:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                address:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                visible:
+                    type:
+                        - boolean
+                        - 'null'
+                startDate:
+                    type: string
+                    format: date-time
+                endDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                moreInfo:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                ExhibitAdmins:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ExhibitAdmin'
+                Users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/User'
+                Artworks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Artwork'
+            required:
+                - name
+                - description
+                - startDate
+                - created_at
+                - updated_at
+        Member:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                firstName:
+                    type: string
+                    maxLength: 255
+                lastName:
+                    type: string
+                    maxLength: 255
+                firstNameNepali:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                lastNameNepali:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                dob:
+                    type:
+                        - string
+                        - 'null'
+                    format: date
+                startDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date
+                endDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date
+                photoUrl:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                description:
+                    type:
+                        - string
+                        - 'null'
+                email:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+            required:
+                - firstName
+                - lastName
+                - created_at
+                - updated_at
+        RefreshToken:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                token:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                expiryDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                createdByIp:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                revokedDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                revokedByIp:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                replacedByToken:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                User:
+                    $ref: '#/components/schemas/User'
+            required:
+                - id
+                - created_at
+                - updated_at
+        User:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                username:
+                    type: string
+                    maxLength: 255
+                password:
+                    type: string
+                    maxLength: 255
+                memberId:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                firstName:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                lastName:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                organization:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                occupation:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                photoUrl:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                role:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                verificationToken:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                resetToken:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                resetTokenExpiry:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                RefreshTokens:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RefreshToken'
+                ExhibitAdmins:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ExhibitAdmin'
+                Exhibits:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Exhibit'
+                Artworks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Artwork'
+            required:
+                - username
+                - password
+                - created_at
+                - updated_at

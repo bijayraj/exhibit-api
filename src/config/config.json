@@ -1,0 +1,59 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "./src/resource/db3.sqlite3",
+    "seederStorage": "sequelize",
+    "jwtSecret": "Apple ball cat",
+    "swaggerApplicationName": "VOG API V1 - Dev",
+    "baseApiPath": "/api/v1"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "./src/resource/db3.sqlite3",
+    "seederStorage": "sequelize",
+    "jwtSecret": "Apple ball cat",
+    "swaggerApplicationName": "VOG API V1 - Test/Staging",
+    "baseApiPath": "/api/v1",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "developments_old": {
+    "use_env_variable": "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "operatorAliases": false,
+    "seederStorage": "sequelize",
+    "jwtSecret": "Apple ball cat egg fat goat",
+    "swaggerApplicationName": "VOG API V1 - Prod",
+    "baseApiPath": "/api/v1"
+  },
+  "development_2": {
+    "host": "salt.db.elephantsql.com",
+    "username": "athibaho",
+    "password": "km5VdHnxwihAdqM79l2_Fa5FEv-2rFD-",
+    "database": "athibaho",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "operatorAliases": false,
+    "seederStorage": "sequelize",
+    "jwtSecret": "Apple ball cat egg fat goat",
+    "swaggerApplicationName": "Baseball Pitch Recognition- Prod",
+    "baseApiPath": "/api/v1"
+  }
+}

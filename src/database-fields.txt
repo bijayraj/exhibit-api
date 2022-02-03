@@ -1,0 +1,87 @@
+Tables:
+
+
+Department
+    Id: int
+    Name:string
+    Name_Nepali: string
+    description: 
+
+Batch
+    Id: int
+    Name: string
+
+Section
+    Id: int
+    Name: string
+
+
+-- Members:
+    Id: integer
+    First Name : string
+    Last Name : string
+    FirstName_Nepali: 
+    LastName_Nepali:
+    DOB: date
+    Department: int: ForeignKey
+    Batch: int : ForeignKey
+    Roll Number: 
+    StartYear:
+    EndYear:
+    PhotoUrl: 
+    Other_Details: string
+
+    //---Address in Nepal
+    District, Nagarpalika, Bla bla bla
+
+    Current_Address_Is_Nepal : boolean
+
+    //----Current Address Information---->
+    Country: integer
+    City: string
+    Street Address: string
+    Email: string
+    Phone: string
+
+    //Profession Information
+
+    Occupation: string
+    AssocuatedOrganization: string
+    Organization_Address: string
+    Position: string
+    Description About Current Postion: 
+
+//---Social Media Information-----------
+    In a separate table: social Medias linked by MemberID
+
+//External Links: 
+    Place to keep links to bio or project description pages bla bla.. 
+
+
+Districts:
+    id: int
+    name: string
+    name_nepali: string
+
+Nagarpalikas/Gaupalikas:
+    id: int
+    name: string
+    name_nepali: string
+
+Countries:
+    id: int
+    name: string
+    name_nepali: string
+
+
+User:
+    id:
+    memberId: int : ForeignKey
+    userName: string //Can be email field pulled from member table
+    password: string: hased
+    last_login:datetime
+    role: string
+    
+
+
+
