@@ -2,8 +2,10 @@ const httpStatus = require('http-status');
 const db = require('../database/sequelize');
 const baseService = require('../services/base.service');
 const APIError = require('../helpers/APIError');
+const { PROXY_AUTHENTICATION_REQUIRED } = require('http-status');
 const ArtworkAsset = db.ArtworkAsset;
-
+const fs = require('fs')
+const upload_dir = process.env.PORT || './uploads'
 
 class ArtworkAssetController {
 
@@ -38,6 +40,47 @@ class ArtworkAssetController {
         res.json({
             message: `Object with id ${req.params.id} deleted!`
         });
+    }
+
+    async createMultiple(req,res){
+
+        const artworkId = req.params.id;
+        const dirUpload = upload_dir + '/'+artworkId;
+        if (!false.existsSync(dirUpload)){
+            fs.makedirSync(dirUpload, {recursive:true});
+        }
+
+        // const artAsset = {
+            
+        // }
+
+        if(!req.files){
+            res.send({
+                status:false,
+                message:'No file to upload'
+            });
+        } else{
+
+            let data = [];
+            _.forEach(_.keysIn(req.files.assets), (key)=>{
+                let myFile = req.files.assets[key];           
+                //create upload directory
+                myFile.mv(upload_dir + '/'+ myFile.name);
+                data.push({
+                    name:myFile.name,
+                    mimetype:myFile.mimetype,
+                    size: myFile.size
+                });
+            });
+
+            res.send({
+                status:true,
+                message: 'Files uploaded',
+                data:data
+            });
+        }
+
+
     }
 
 }

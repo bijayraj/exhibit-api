@@ -49,6 +49,8 @@ class ArtworkController {
         });
     }
 
+    
+
 }
 
 module.exports = new ArtworkController()

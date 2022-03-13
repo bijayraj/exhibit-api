@@ -20,14 +20,14 @@ const options = {
         info: {
             title: applicationName,
             version: "1.0.0",
-            description: "An API project for Voice on the GO project",
+            description: "An API project Artwork Project",
             license: {
                 name: "MIT",
                 url: "https://choosealicense.com/licenses/mit/"
             },
             contact: {
-                name: "XR Learning Hub",
-                url: "https://xrlearninghub.siu.edu/",
+                name: "Bijay Raj Paudel",
+                url: "bijayraj.paudel",
                 email: "bijayraj.paudel@siu.edu"
             }
         },
