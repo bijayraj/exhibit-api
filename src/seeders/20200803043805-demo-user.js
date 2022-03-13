@@ -8,7 +8,7 @@ module.exports = {
         const password = bcrypt.hashSync('admin123', 10);
         const vToken = crypto.randomBytes(40).toString('hex');
         await queryInterface.bulkInsert('Users', [{
-            username: 'admin@admin.com',
+            username: 'admin@siu.edu',
             password: password,
             first_name:'Bijay Raj',
             last_name: 'Paudel',
