@@ -17,9 +17,7 @@ router
  *  /exhibit-admin:
  *    get:
  *      summary: Gets a list of all exhibits limited by page and pagesize
- *      security:
- *          - BearerAuth: []
- *      tags: [UserExercise]
+ *      tags: [Exhibit]
  *      parameters:
  *        - in: query
  *          name: page

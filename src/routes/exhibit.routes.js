@@ -17,8 +17,6 @@ router
  *  /exhibit:
  *    get:
  *      summary: Gets a list of all exhibits limited by page and pagesize
- *      security:
- *          - BearerAuth: []
  *      tags: [Exhibit]
  *      parameters:
  *        - in: query
@@ -99,8 +97,6 @@ router
  *  /exhibit/{id}:
  *    get:
  *      summary: Gets a exhibit by id
- *      security:
- *          - BearerAuth: []
  *      tags: [Exhibit]
  *      parameters:
  *          - name: "id"

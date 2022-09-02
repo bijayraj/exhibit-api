@@ -17,8 +17,6 @@ router
  *  /artwork-asset:
  *    get:
  *      summary: Gets a list of all artworkAssets limited by page and pagesize
- *      security:
- *          - BearerAuth: []
  *      tags: [ArtworkAsset]
  *      parameters:
  *        - in: query
@@ -93,8 +91,6 @@ router
  *  /artwork-asset/{id}:
  *    get:
  *      summary: Gets a artworkAsset by id
- *      security:
- *          - BearerAuth: []
  *      tags: [ArtworkAsset]
  *      parameters:
  *          - name: "id"
@@ -198,6 +194,33 @@ router.route('/:id')
 
 
 
+
+/**
+ * @swagger
+ * path:
+ *  /artwork-asset/artwork/{id}:
+ *    get:
+ *      summary: Gets a artworkAsset by artwork id
+ *      tags: [ArtworkAsset]
+ *      parameters:
+ *          - name: "id"
+ *            in: "path"
+ *            description: "Id of artwork"
+ *            required: true
+ *            type: "integer"
+ *            format: "int64"
+ *      responses:
+ *        "200":
+ *          description: successful message is successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/ArtworkAsset'
+ */
+
+
+router.route('/artwork/:id')
+    .get(artworkAssetCtrl.getByArtworkId)
 
 
 module.exports = router;

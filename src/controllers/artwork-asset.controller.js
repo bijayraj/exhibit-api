@@ -83,6 +83,10 @@ class ArtworkAssetController {
 
     }
 
+    async getByArtworkId(req,res){
+        const dept = await new baseService(db.ArtworkAsset).findByField({ArtworkId: req.params.id});
+        res.json(dept);
+    }
 }
 
 module.exports = new ArtworkAssetController()

@@ -11,6 +11,10 @@ class ArtworkAsset extends Sequelize.Model {
                 primaryKey: true,
                 autoIncrement: true
             },
+            title: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             description: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -21,7 +25,9 @@ class ArtworkAsset extends Sequelize.Model {
             },
             assetType: {
                 type: DataTypes.ENUM,
-                values:[0,1,2]
+                values:[0,1,2,3,4,5,6],
+                defaultValue: 0,
+                allowNull:false
             },
             visible:{
                 type:DataTypes.BOOLEAN,

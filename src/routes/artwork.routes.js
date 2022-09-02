@@ -9,7 +9,7 @@ router
     .route('/')
     .get(artworkCtrl.list)
     /** POST /api/artworks Create new artwork */
-    .post(authorize([Role.User, Role.Admin, Role.SuperAdmin]), artworkCtrl.create);
+    .post(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]),artworkCtrl.create);
 
 /**
  * @swagger
@@ -17,8 +17,6 @@ router
  *  /artwork:
  *    get:
  *      summary: Gets a list of all artworks limited by page and pagesize
- *      security:
- *          - BearerAuth: []
  *      tags: [Artwork]
  *      parameters:
  *        - in: query
@@ -95,8 +93,6 @@ router
  *  /artwork/{id}:
  *    get:
  *      summary: Gets a artwork by id
- *      security:
- *          - BearerAuth: []
  *      tags: [Artwork]
  *      parameters:
  *          - name: "id"
@@ -196,7 +192,7 @@ router
 router.route('/:id')
     .get(artworkCtrl.get)
     /** PUT /api/users/:userId - Update user */
-    .put(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.update)
+    .put(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]),artworkCtrl.update)
     /** DELETE /api/users/:userId - Delete user */
     .delete(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.remove);
 

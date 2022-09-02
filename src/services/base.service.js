@@ -68,7 +68,12 @@ class BaseService {
         await mObj.destroy();
     }
 
-
+    async findByField(whereCondition){
+        const allObjs = await this.model.findAll({
+            where: whereCondition
+        })
+        return allObjs;
+    }
 
 }
 
