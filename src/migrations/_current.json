@@ -9,6 +9,11 @@
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "title": {
+                    "allowNull": false,
+                    "field": "title",
+                    "seqType": "Sequelize.STRING"
+                },
                 "description": {
                     "allowNull": false,
                     "field": "description",
@@ -20,8 +25,12 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "assetType": {
+                    "defaultValue": {
+                        "value": 0
+                    },
+                    "allowNull": false,
                     "field": "asset_type",
-                    "seqType": "Sequelize.ENUM('0', '1', '2')"
+                    "seqType": "Sequelize.ENUM('0', '1', '2', '3', '4', '5', '6')"
                 },
                 "visible": {
                     "defaultValue": {
@@ -445,5 +454,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

@@ -8,6 +8,9 @@ components:
                         - integer
                         - 'null'
                     format: int32
+                title:
+                    type: string
+                    maxLength: 255
                 description:
                     type: string
                     maxLength: 255
@@ -15,13 +18,15 @@ components:
                     type: string
                     maxLength: 255
                 assetType:
-                    type:
-                        - string
-                        - 'null'
+                    type: string
                     enum:
                         - 0
                         - 1
                         - 2
+                        - 3
+                        - 4
+                        - 5
+                        - 6
                 visible:
                     type:
                         - boolean
@@ -44,8 +49,10 @@ components:
                 Artwork:
                     $ref: '#/components/schemas/Artwork'
             required:
+                - title
                 - description
                 - address
+                - assetType
                 - created_at
                 - updated_at
         Artwork:

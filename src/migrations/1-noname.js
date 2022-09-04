@@ -8,6 +8,8 @@ var Sequelize = require('sequelize');
  * createTable "exhibits", deps: []
  * createTable "members", deps: []
  * createTable "users", deps: []
+ * createTable "artworks", deps: [exhibits, users]
+ * createTable "artwork_assets", deps: [artworks]
  * createTable "exhibit_admins", deps: [users, exhibits]
  * createTable "refresh_tokens", deps: [users]
  *
@@ -16,7 +18,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2022-02-01T19:58:28.729Z",
+    "created": "2022-09-03T04:42:55.876Z",
     "comment": ""
 };
 
@@ -196,6 +198,10 @@ var migrationCommands = function(transaction) {
                         "type": Sequelize.STRING,
                         "field": "occupation"
                     },
+                    "photoUrl": {
+                        "type": Sequelize.STRING,
+                        "field": "photo_url"
+                    },
                     "role": {
                         "type": Sequelize.STRING,
                         "field": "role"
@@ -221,6 +227,155 @@ var migrationCommands = function(transaction) {
                         "type": Sequelize.DATE,
                         "field": "updated_at",
                         "allowNull": false
+                    }
+                },
+                {
+                    "transaction": transaction
+                }
+            ]
+        },
+        {
+            fn: "createTable",
+            params: [
+                "artworks",
+                {
+                    "id": {
+                        "type": Sequelize.INTEGER,
+                        "field": "id",
+                        "autoIncrement": true,
+                        "primaryKey": true
+                    },
+                    "title": {
+                        "type": Sequelize.STRING,
+                        "field": "title",
+                        "allowNull": false
+                    },
+                    "description": {
+                        "type": Sequelize.STRING,
+                        "field": "description",
+                        "allowNull": false
+                    },
+                    "artType": {
+                        "type": Sequelize.STRING,
+                        "field": "art_type"
+                    },
+                    "moreInfo": {
+                        "type": Sequelize.STRING,
+                        "field": "more_info"
+                    },
+                    "approved": {
+                        "type": Sequelize.BOOLEAN,
+                        "field": "approved",
+                        "defaultValue": false
+                    },
+                    "approvedDate": {
+                        "type": Sequelize.DATE,
+                        "field": "approved_date"
+                    },
+                    "created_at": {
+                        "type": Sequelize.DATE,
+                        "field": "created_at",
+                        "allowNull": false
+                    },
+                    "updated_at": {
+                        "type": Sequelize.DATE,
+                        "field": "updated_at",
+                        "allowNull": false
+                    },
+                    "ExhibitId": {
+                        "type": Sequelize.INTEGER,
+                        "field": "exhibit_id",
+                        "onUpdate": "CASCADE",
+                        "onDelete": "SET NULL",
+                        "references": {
+                            "model": "exhibits",
+                            "key": "id"
+                        },
+                        "allowNull": true
+                    },
+                    "UserId": {
+                        "type": Sequelize.INTEGER,
+                        "field": "user_id",
+                        "onUpdate": "CASCADE",
+                        "onDelete": "SET NULL",
+                        "references": {
+                            "model": "users",
+                            "key": "id"
+                        },
+                        "allowNull": true
+                    }
+                },
+                {
+                    "transaction": transaction
+                }
+            ]
+        },
+        {
+            fn: "createTable",
+            params: [
+                "artwork_assets",
+                {
+                    "id": {
+                        "type": Sequelize.INTEGER,
+                        "field": "id",
+                        "autoIncrement": true,
+                        "primaryKey": true
+                    },
+                    "title": {
+                        "type": Sequelize.STRING,
+                        "field": "title",
+                        "allowNull": false
+                    },
+                    "description": {
+                        "type": Sequelize.STRING,
+                        "field": "description",
+                        "allowNull": false
+                    },
+                    "address": {
+                        "type": Sequelize.STRING,
+                        "field": "address",
+                        "allowNull": false
+                    },
+                    "assetType": {
+                        "type": Sequelize.ENUM('0', '1', '2', '3', '4', '5', '6'),
+                        "field": "asset_type",
+                        "allowNull": false,
+                        "defaultValue": 0
+                    },
+                    "visible": {
+                        "type": Sequelize.BOOLEAN,
+                        "field": "visible",
+                        "defaultValue": true
+                    },
+                    "approved": {
+                        "type": Sequelize.BOOLEAN,
+                        "field": "approved",
+                        "defaultValue": false
+                    },
+                    "approvedDate": {
+                        "type": Sequelize.DATE,
+                        "field": "approved_date"
+                    },
+                    "created_at": {
+                        "type": Sequelize.DATE,
+                        "field": "created_at",
+                        "allowNull": false
+                    },
+                    "updated_at": {
+                        "type": Sequelize.DATE,
+                        "field": "updated_at",
+                        "allowNull": false
+                    },
+                    "ArtworkId": {
+                        "type": Sequelize.INTEGER,
+                        "field": "artwork_id",
+                        "onUpdate": "CASCADE",
+                        "onDelete": "SET NULL",
+                        "references": {
+                            "model": "artworks",
+                            "key": "id"
+                        },
+                        "allowNull": true
                     }
                 },
                 {
@@ -350,6 +505,18 @@ var migrationCommands = function(transaction) {
 };
 var rollbackCommands = function(transaction) {
     return [{
+            fn: "dropTable",
+            params: ["artwork_assets", {
+                transaction: transaction
+            }]
+        },
+        {
+            fn: "dropTable",
+            params: ["artworks", {
+                transaction: transaction
+            }]
+        },
+        {
             fn: "dropTable",
             params: ["exhibit_admins", {
                 transaction: transaction
