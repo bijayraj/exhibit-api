@@ -53,15 +53,15 @@ class ArtworkAsset extends Sequelize.Model {
     }
 
     //This is used in route validation! 
-    static get validationCreate() {
-        const joiObj = Joi.object({
-            description: Joi.string().required(),
-            address: Joi.string().required(),
-            assetType: Joi.number().required(),
-            visible: Joi.boolean(),
-        });
-        return joiObj;
-    }
+    // static get validationCreate() {
+    //     const joiObj = Joi.object({
+    //         description: Joi.string().required(),
+    //         address: Joi.string().required(),
+    //         assetType: Joi.number().required(),
+    //         visible: Joi.boolean(),
+    //     });
+    //     return joiObj;
+    // }
 
     static associate(models) {
         this.belongsTo(models.Artwork);

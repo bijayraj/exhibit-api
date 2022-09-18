@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const {
     Joi
-} = require("express-validation");
+} = require("@hapi/joi");
 
 class Artwork extends Sequelize.Model {
     static init(sequelize, DataTypes) {
@@ -44,15 +44,15 @@ class Artwork extends Sequelize.Model {
     }
 
     //This is used in route validation! 
-    static get validationCreate() {
-        const joiObj = Joi.object({
-            title: Joi.string().required(),
-            description: Joi.string(),
-            artType: Joi.string(),
-            moreInfo: Joi.string()
-        });
-        return joiObj;
-    }
+    // static get validationCreate() {
+    //     const joiObj = Joi.object({
+    //         title: Joi.string().required(),
+    //         description: Joi.string(),
+    //         artType: Joi.string(),
+    //         moreInfo: Joi.string()
+    //     });
+    //     return joiObj;
+    // }
 
     static associate(models) {
         this.belongsTo(models.Exhibit);

@@ -17,8 +17,7 @@ const loginSchema = {
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /login:
  *    post:
  *      summary: Authenticates and logs in
@@ -49,8 +48,7 @@ unauth.post('/login', validator.validate(loginSchema), authController.login)
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /refresh-token:
  *    post:
  *      summary: Sends a new jwt on receiving a request token
@@ -84,8 +82,7 @@ unauth.post('/refresh-token', authController.refreshToken);
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /revoke-token:
  *    post:
  *      summary: Revokes a token

@@ -16,8 +16,7 @@ router
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /user:
  *    get:
  *      summary: Gets a list of all users
@@ -37,8 +36,7 @@ router
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /user:
  *    post:
  *      summary: Creates user
@@ -71,8 +69,7 @@ router
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /user/{userId}:
  *    get:
  *      summary: Gets a user by id
@@ -101,9 +98,6 @@ router.route('/:userId')
     /** DELETE /api/users/:userId - Delete user */
     .delete(authorize(Role.SuperAdmin), userCtrl.remove);
 
-
-
-    
 
 
 /** Load user when API with userId route parameter is hit */

@@ -9,6 +9,8 @@ const path = require('path');
 const routesDir = path.normalize(`${__dirname}/routes`);
 const apiFiles = glob.sync(routesDir + '/*.js');
 
+console.log(apiFiles)
+
 const config = require('./config/index');
 
 const applicationName = config.swaggerApplicationName;
@@ -16,7 +18,8 @@ const applicationName = config.swaggerApplicationName;
 // Swagger set up
 const options = {
     swaggerDefinition: {
-        openapi: "3.0.0",
+        openapi: "3.0.2",
+        // swagger:'2.0',
         info: {
             title: applicationName,
             version: "1.0.0",
@@ -37,9 +40,12 @@ const options = {
         }]
     },
 
-    apis: ["./src/components.yaml",
+    apis: [
+        "./src/components.yaml",
         "./src/auto-sequelize-models.yaml",
         "./src/auto-joi-swagger.yaml",
+        './src/routes/artwork-asset.routes.js',
+        './src/example.js',
         ...apiFiles
     ]
 };

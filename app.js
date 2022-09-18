@@ -17,6 +17,36 @@ const httpStatus = require('http-status-codes');
 require('dotenv').config();
 
 const config = require('./src/config');
+const multer = require('multer');
+const router = express.Router();
+const path = require('path');
+
+const fileStorage = multer.diskStorage({
+    // Destination to store image     
+    destination: 'uploaded',
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '_' + Date.now()
+            + path.extname(file.originalname))
+        // file.fieldname is name of the field (image)
+        // path.extname get the uploaded file extension
+    }
+});
+
+const fileUpload = multer({
+    storage: fileStorage,
+    limits: {
+        fileSize: 30000000 // 1000000 Bytes = 1 MB
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg|jpeg|gif|txt|wav|mp3|flv|ogg|pdf|mp4|svg)$/)) {
+            // upload only png and jpg format
+            return cb(new Error('Please upload a valid file'))
+        }
+        cb(undefined, true)
+    }
+})
+
+
 
 const startServer = function (port) {
     const app = express();
@@ -51,6 +81,23 @@ const startServer = function (port) {
     //Configure and use swagger
     app.use('/', swagger);
     require('./src/routes')(app);
+
+    // For Single image upload
+    router.post('/upload', fileUpload.single('filename'), (req, res) => {
+        res.send({ full_path: `${config.fullApiPath}/uploaded/${req.file.filename}`, file: req.file })
+    }, (error, req, res, next) => {
+        res.status(400).send({ error: error.message })
+    });
+
+    router.post('/uploadBulk', fileUpload.array('filenames', 4), (req, res) => {
+        res.send(req.files)
+    }, (error, req, res, next) => {
+        res.status(400).send({ error: error.message })
+    });
+
+    app.use('/api/v1', router);
+    app.use('/api/v1/uploaded', express.static('uploaded'))
+
 
     // if error is not an instanceOf APIError, convert it.
     app.use((err, req, res, next) => {

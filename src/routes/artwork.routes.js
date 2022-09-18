@@ -9,11 +9,10 @@ router
     .route('/')
     .get(artworkCtrl.list)
     /** POST /api/artworks Create new artwork */
-    .post(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]),artworkCtrl.create);
+    .post(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.create);
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /artwork:
  *    get:
  *      summary: Gets a list of all artworks limited by page and pagesize
@@ -43,8 +42,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /artwork:
  *    post:
  *      summary: Creates Artwork
@@ -88,8 +86,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /artwork/{id}:
  *    get:
  *      summary: Gets a artwork by id
@@ -112,8 +109,7 @@ router
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /artwork/{id}:
  *    put:
  *      summary: Updates the artwork
@@ -164,8 +160,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /artwork/{id}:
  *    delete:
  *      summary: Deletes a artwork by id
@@ -192,7 +187,7 @@ router
 router.route('/:id')
     .get(artworkCtrl.get)
     /** PUT /api/users/:userId - Update user */
-    .put(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]),artworkCtrl.update)
+    .put(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.update)
     /** DELETE /api/users/:userId - Delete user */
     .delete(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.remove);
 

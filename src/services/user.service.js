@@ -123,7 +123,7 @@ class UserService {
             },
             include: ['User']
         });
-        if (!refreshToken || !refreshToken.isActive) throw new APIError('Invalid token', 400);
+        if (!refreshToken || !refreshToken.isActive) throw new APIError('Invalid refresh token', 400);
         return refreshToken;
     }
 

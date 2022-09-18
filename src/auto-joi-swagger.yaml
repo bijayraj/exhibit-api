@@ -1,36 +1,5 @@
 components:
     schemas:
-        Artwork_assetCreate:
-            type: object
-            properties:
-                description:
-                    type: string
-                address:
-                    type: string
-                assetType:
-                    type: number
-                    format: float
-                visible:
-                    type: boolean
-            required:
-                - description
-                - address
-                - assetType
-            additionalProperties: false
-        ArtworkCreate:
-            type: object
-            properties:
-                title:
-                    type: string
-                description:
-                    type: string
-                artType:
-                    type: string
-                moreInfo:
-                    type: string
-            required:
-                - title
-            additionalProperties: false
         ExhibitCreate:
             type: object
             properties:
