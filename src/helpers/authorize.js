@@ -36,6 +36,10 @@ function authorize(roles = []) {
 
             // authentication and authorization successful
             req.user.role = user.role;
+            req.user.username = user.username;
+            req.user.firstName = user.firstName;
+            req.user.lastName = user.lastName;
+            req.user.photoUrl = user.photoUrl;
             req.user.ownsToken = token => !!refreshTokens.find(x => x.token === token);
             next();
         }

@@ -40,6 +40,19 @@ components:
                         - string
                         - 'null'
                     format: date-time
+                autoPlay:
+                    type:
+                        - boolean
+                        - 'null'
+                displayOrder:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                longDescription:
+                    type:
+                        - string
+                        - 'null'
                 created_at:
                     type: string
                     format: date-time
@@ -69,6 +82,10 @@ components:
                 description:
                     type: string
                     maxLength: 255
+                longDescription:
+                    type:
+                        - string
+                        - 'null'
                 artType:
                     type:
                         - string

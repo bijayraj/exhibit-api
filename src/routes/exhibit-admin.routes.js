@@ -16,7 +16,7 @@ router
  *  /exhibit-admin:
  *    get:
  *      summary: Gets a list of all exhibits limited by page and pagesize
- *      tags: [Exhibit]
+ *      tags: [ExhibitAdmin]
  *      parameters:
  *        - in: query
  *          name: page
@@ -46,7 +46,7 @@ router
  *  /exhibit-admin:
  *    post:
  *      summary: Creates Exercise
- *      tags: [UserExercise]
+ *      tags: [ExhibitAdmin]
  *      security:
  *          - BearerAuth: []           
  *      requestBody:
@@ -76,7 +76,7 @@ router
  *      summary: Gets a exhibit by id
  *      security:
  *          - BearerAuth: []
- *      tags: [UserExercise]
+ *      tags: [ExhibitAdmin]
  *      parameters:
  *          - name: "id"
  *            in: "path"
@@ -99,7 +99,7 @@ router
  *  /exhibit-admin/{id}:
  *    put:
  *      summary: Updates the exhibit
- *      tags: [UserExercise]
+ *      tags: [ExhibitAdmin]
  *      security:
  *          - BearerAuth: []
  *      parameters:
@@ -136,7 +136,7 @@ router
  *      summary: Deletes a exhibit by id
  *      security:
  *          - BearerAuth: []
- *      tags: [UserExercise]
+ *      tags: [ExhibitAdmin]
  *      parameters:
  *          - name: "id"
  *            in: "path"

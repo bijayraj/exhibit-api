@@ -50,18 +50,6 @@
                     "field": "approved_date",
                     "seqType": "Sequelize.DATE"
                 },
-                "autoPlay": {
-                    "field": "auto_play",
-                    "seqType": "Sequelize.BOOLEAN"
-                },
-                "displayOrder": {
-                    "field": "display_order",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "longDescription": {
-                    "field": "long_description",
-                    "seqType": "Sequelize.TEXT"
-                },
                 "created_at": {
                     "allowNull": false,
                     "field": "created_at",
@@ -104,10 +92,6 @@
                     "allowNull": false,
                     "field": "description",
                     "seqType": "Sequelize.STRING"
-                },
-                "longDescription": {
-                    "field": "long_description",
-                    "seqType": "Sequelize.TEXT"
                 },
                 "artType": {
                     "field": "art_type",
@@ -470,5 +454,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

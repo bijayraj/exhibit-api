@@ -197,6 +197,8 @@ router.route('/:id')
  *    get:
  *      summary: Gets a artwork by by user id
  *      tags: [Artwork]
+ *      security:
+ *          - BearerAuth: []
  *      parameters:
  *          - name: "id"
  *            in: "path"
@@ -213,6 +215,6 @@ router.route('/:id')
  *                $ref: '#/components/schemas/Artwork'
  */
 router.route('/user/:id')
-    .get([Role.Artist, Role.Admin, Role.SuperAdmin], artworkCtrl.listByUser)
+    .get(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.listByUser)
 
 module.exports = router;
