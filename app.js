@@ -136,7 +136,7 @@ const startServer = function (port) {
     ) =>
         res.status(err.status || 500).json({
             message: err.isPublic ? err.message : httpStatus[err.status],
-            stack: process.env.NODE_ENV === 'development' ? err.stack : {},
+            stack: (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === "development_local") ? err.stack : {},
         }));
 
 

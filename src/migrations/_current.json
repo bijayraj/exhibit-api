@@ -62,6 +62,14 @@
                     "field": "long_description",
                     "seqType": "Sequelize.TEXT"
                 },
+                "onlyInHeadphone": {
+                    "field": "only_in_headphone",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "approvedBy": {
+                    "field": "approved_by",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "created_at": {
                     "allowNull": false,
                     "field": "created_at",
@@ -127,6 +135,14 @@
                 "approvedDate": {
                     "field": "approved_date",
                     "seqType": "Sequelize.DATE"
+                },
+                "approvedBy": {
+                    "field": "approved_by",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "visible": {
+                    "field": "visible",
+                    "seqType": "Sequelize.BOOLEAN"
                 },
                 "created_at": {
                     "allowNull": false,
@@ -470,5 +486,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }

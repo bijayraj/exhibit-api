@@ -48,6 +48,12 @@ class ArtworkAsset extends Sequelize.Model {
             },
             longDescription: {
                 type: DataTypes.TEXT
+            },
+            onlyInHeadphone: {
+                type: DataTypes.BOOLEAN
+            },
+            approvedBy: {
+                type: DataTypes.INTEGER
             }
 
 

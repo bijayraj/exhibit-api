@@ -217,4 +217,42 @@ router.route('/:id')
 router.route('/user/:id')
     .get(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.listByUser)
 
+
+
+/**
+* @openapi
+*  /artwork/question/{id}:
+*    post:
+*      summary: Creates Artwork
+*      tags: [Artwork]
+*      parameters:
+*          - name: "id"
+*            in: "path"
+*            description: "Id of artwork"
+*            required: true
+*            type: "integer"
+*            format: "int64"         
+*      requestBody:
+*        required: true
+*        content:
+*          application/json:
+*            schema:
+*              type: object
+*              required:
+*                  - question
+*              properties:
+*                  question:
+*                      type: string
+*      responses:
+*        "200":
+*          description: successful message is successful
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/Artwork'
+*/
+
+router.route('/question/:id')
+    .post(artworkCtrl.askQuestion)
+
 module.exports = router;

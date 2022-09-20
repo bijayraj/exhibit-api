@@ -34,6 +34,12 @@ class Artwork extends Sequelize.Model {
             },
             approvedDate: {
                 type: DataTypes.DATE,
+            },
+            approvedBy: {
+                type: DataTypes.INTEGER
+            },
+            visible: {
+                type: DataTypes.BOOLEAN
             }
 
 

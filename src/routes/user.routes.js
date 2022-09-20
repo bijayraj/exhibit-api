@@ -89,7 +89,7 @@ router
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/Account'
+ *                $ref: '#/components/schemas/User'
  */
 router.route('/:userId')
     .get(authorize(Role.SuperAdmin), userCtrl.get)
