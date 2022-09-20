@@ -43,8 +43,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit:
  *    post:
  *      summary: Creates Exhibit
@@ -92,8 +91,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit/{id}:
  *    get:
  *      summary: Gets a exhibit by id
@@ -116,8 +114,7 @@ router
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit/{id}:
  *    put:
  *      summary: Updates the exhibit
@@ -172,8 +169,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit/{id}:
  *    delete:
  *      summary: Deletes a exhibit by id

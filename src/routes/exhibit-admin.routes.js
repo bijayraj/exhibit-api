@@ -12,8 +12,7 @@ router
     .post(authorize([Role.Admin, Role.SuperAdmin]), exhibitAdminCtrl.create);
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit-admin:
  *    get:
  *      summary: Gets a list of all exhibits limited by page and pagesize
@@ -43,8 +42,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit-admin:
  *    post:
  *      summary: Creates Exercise
@@ -72,8 +70,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit-admin/{id}:
  *    get:
  *      summary: Gets a exhibit by id
@@ -98,8 +95,7 @@ router
 
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit-admin/{id}:
  *    put:
  *      summary: Updates the exhibit
@@ -134,8 +130,7 @@ router
  */
 
 /**
- * @swagger
- * path:
+ * @openapi
  *  /exhibit-admin/{id}:
  *    delete:
  *      summary: Deletes a exhibit by id

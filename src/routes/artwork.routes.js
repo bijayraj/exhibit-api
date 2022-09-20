@@ -7,7 +7,7 @@ const Role = require('../models/role')
 
 router
     .route('/')
-    .get(artworkCtrl.list)
+    .get(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.list)
     /** POST /api/artworks Create new artwork */
     .post(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.create);
 
@@ -191,8 +191,28 @@ router.route('/:id')
     /** DELETE /api/users/:userId - Delete user */
     .delete(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkCtrl.remove);
 
-
-
-
+/**
+ * @openapi
+ *  /artwork/user/{id}:
+ *    get:
+ *      summary: Gets a artwork by by user id
+ *      tags: [Artwork]
+ *      parameters:
+ *          - name: "id"
+ *            in: "path"
+ *            description: "Id of artwork"
+ *            required: true
+ *            type: "integer"
+ *            format: "int64"
+ *      responses:
+ *        "200":
+ *          description: successful message is successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Artwork'
+ */
+router.route('/user/:id')
+    .get([Role.Artist, Role.Admin, Role.SuperAdmin], artworkCtrl.listByUser)
 
 module.exports = router;

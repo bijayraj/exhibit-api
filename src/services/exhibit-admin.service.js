@@ -14,9 +14,9 @@ class ExhibitAdminService extends BaseService {
 
     async create(params) {
         try {
-            const mObj = await this.model.create(params,{
-                include:[{
-                    model:db.User
+            const mObj = await this.model.create(params, {
+                include: [{
+                    model: db.User
                 }]
             });
             return mObj;
@@ -25,26 +25,26 @@ class ExhibitAdminService extends BaseService {
         }
     }
 
-    async getByUserId(id){
+    async getByUserId(id) {
         const obj = await this.model.findAll({
-            where:{
+            where: {
                 user_id: id
             },
             include: [db.Exhibit]
-       });
+        });
 
-       return obj;
+        return obj;
     }
 
-    async getByExhibitId(id){
+    async getByExhibitId(id) {
         const obj = await this.model.findAll({
-            where:{
+            where: {
                 exhibit_id: id
             },
             include: [db.User]
-       });
+        });
 
-       return obj;
+        return obj;
     }
 
 
@@ -74,7 +74,7 @@ class ExhibitAdminService extends BaseService {
     async list(page, pageSize, include = []) {
         const where = {};
         //Check where and construct the where query here!
-        
+
         const obj = await this.model.findAll({
             include: include,
             ...paginate({
@@ -87,14 +87,11 @@ class ExhibitAdminService extends BaseService {
     }
 
 
-    async addAdminToExhibit(userId, exhibitId){
-        
+    async addAdminToExhibit(userId, exhibitId) {
         const user = await db.User.findByPk(userId);
         const exhibit = await db.Exhibit.findByPk(exhibitId);
         const obj = user.addExhibit(exhibit);
-
         return obj;
-
     }
 
 

@@ -19,20 +19,23 @@ class Artwork extends Sequelize.Model {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            longDescription: {
+                type: DataTypes.TEXT,
+            },
             artType: {
                 type: DataTypes.STRING,
             },
             moreInfo: {
                 type: DataTypes.STRING,
             },
-            approved:{
-                type:DataTypes.BOOLEAN,
+            approved: {
+                type: DataTypes.BOOLEAN,
                 defaultValue: false
             },
-            approvedDate:{
-                type:DataTypes.DATE,
-            }           
-            
+            approvedDate: {
+                type: DataTypes.DATE,
+            }
+
 
         }, {
             sequelize,

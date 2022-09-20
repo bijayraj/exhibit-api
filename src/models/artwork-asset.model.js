@@ -19,29 +19,38 @@ class ArtworkAsset extends Sequelize.Model {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            address:{
-                type:DataTypes.STRING,
-                allowNull:false
+            address: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             assetType: {
                 type: DataTypes.ENUM,
-                values:[0,1,2,3,4,5,6],
+                values: [0, 1, 2, 3, 4, 5, 6],
                 defaultValue: 0,
-                allowNull:false
+                allowNull: false
             },
-            visible:{
-                type:DataTypes.BOOLEAN,
-                defaultValue:true
-            },       
-            approved:{
-                type:DataTypes.BOOLEAN,
+            visible: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true
+            },
+            approved: {
+                type: DataTypes.BOOLEAN,
                 defaultValue: false
             },
-            approvedDate:{
-                type:DataTypes.DATE,
+            approvedDate: {
+                type: DataTypes.DATE,
+            },
+            autoPlay: {
+                type: DataTypes.BOOLEAN
+            },
+            displayOrder: {
+                type: DataTypes.INTEGER
+            },
+            longDescription: {
+                type: DataTypes.TEXT
             }
 
-            
+
 
         }, {
             sequelize,

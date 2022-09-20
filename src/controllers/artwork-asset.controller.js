@@ -11,7 +11,7 @@ class ArtworkAssetController {
 
     async create(req, res) {
         try {
-            const dept = await new baseService(db.ArtworkAsset).create(req.body);            
+            const dept = await new baseService(db.ArtworkAsset).create(req.body);
             res.json(dept);
         } catch (exception) {
             throw exception
@@ -42,49 +42,49 @@ class ArtworkAssetController {
         });
     }
 
-    async createMultiple(req,res){
+    async createMultiple(req, res) {
 
         const artworkId = req.params.id;
-        const dirUpload = upload_dir + '/'+artworkId;
-        if (!false.existsSync(dirUpload)){
-            fs.makedirSync(dirUpload, {recursive:true});
+        const dirUpload = upload_dir + '/' + artworkId;
+        if (!false.existsSync(dirUpload)) {
+            fs.makedirSync(dirUpload, { recursive: true });
         }
 
         // const artAsset = {
-            
+
         // }
 
-        if(!req.files){
+        if (!req.files) {
             res.send({
-                status:false,
-                message:'No file to upload'
+                status: false,
+                message: 'No file to upload'
             });
-        } else{
+        } else {
 
             let data = [];
-            _.forEach(_.keysIn(req.files.assets), (key)=>{
-                let myFile = req.files.assets[key];           
+            _.forEach(_.keysIn(req.files.assets), (key) => {
+                let myFile = req.files.assets[key];
                 //create upload directory
-                myFile.mv(upload_dir + '/'+ myFile.name);
+                myFile.mv(upload_dir + '/' + myFile.name);
                 data.push({
-                    name:myFile.name,
-                    mimetype:myFile.mimetype,
+                    name: myFile.name,
+                    mimetype: myFile.mimetype,
                     size: myFile.size
                 });
             });
 
             res.send({
-                status:true,
+                status: true,
                 message: 'Files uploaded',
-                data:data
+                data: data
             });
         }
 
 
     }
 
-    async getByArtworkId(req,res){
-        const dept = await new baseService(db.ArtworkAsset).findByField({ArtworkId: req.params.id});
+    async getByArtworkId(req, res) {
+        const dept = await new baseService(db.ArtworkAsset).findByField({ ArtworkId: req.params.id });
         res.json(dept);
     }
 }

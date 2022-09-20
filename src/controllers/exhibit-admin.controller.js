@@ -19,7 +19,7 @@ class ExhibitAdminController {
     async list(req, res) {
         const page = req.query.page;
         const pageSize = req.query.pageSize;
-        const depts = await  ExhibitAdminService.list(page, pageSize, [db.Exercise]);
+        const depts = await ExhibitAdminService.list(page, pageSize, [db.Exercise]);
         res.json(depts);
     }
 
@@ -40,20 +40,18 @@ class ExhibitAdminController {
         });
     }
 
-    async getByUser(req,res){
+    async getByUser(req, res) {
         const depts = await ExhibitAdminService.getByUserId(req.params.id);
         res.json(depts);
     }
 
-    async getByExhibit(req,res){
+    async getByExhibit(req, res) {
         const depts = await ExhibitAdminService.getByExhibitId(req.params.id);
         res.json(depts);
     }
 
-
-
-    async addExhibitAdmin(req,res){
-        const depts = await ExhibitAdminService.addExerciseToUser(req.body.user_id, req.body.exhibit_id);
+    async addExhibitAdmin(req, res) {
+        const depts = await ExhibitAdminService.addAdminToExhibit(req.body.user_id, req.body.exhibit_id);
         res.json(depts);
     }
 
