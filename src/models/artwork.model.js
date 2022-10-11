@@ -67,6 +67,7 @@ class Artwork extends Sequelize.Model {
         this.belongsTo(models.Exhibit);
         this.belongsTo(models.User)
         this.hasMany(models.ArtworkAsset)
+        this.hasMany(models.ArtworkApproval)
         // or
         // this.myAssociation = models.MyModel.belongsTo(models.OtherModel);
     }

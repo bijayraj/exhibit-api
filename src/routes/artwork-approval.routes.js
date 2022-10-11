@@ -1,5 +1,5 @@
 const express = require('express');
-const artworkAssetCtrl = require('../controllers/artwork-asset.controller');
+const artworkApprovalCtrl = require('../controllers/artwork-approval.controller');
 const authorize = require('../helpers/authorize');
 const router = express.Router();
 const Role = require('../models/role')
@@ -7,16 +7,15 @@ const Role = require('../models/role')
 
 router
     .route('/')
-    .get(artworkAssetCtrl.list)
-    /** POST /api/artworkAssets Create new artworkAsset */
-    .post(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkAssetCtrl.create);
+    .get(artworkApprovalCtrl.list)
+    .post(artworkApprovalCtrl.create);
 
 /**
  * @openapi
- *  /artwork-asset:
+ *  /artwork-approval:
  *    get:
  *      summary: Gets a list of all artworkAssets limited by page and pagesize
- *      tags: [ArtworkAsset]
+ *      tags: [ArtworkApproval]
  *      parameters:
  *        - in: query
  *          name: page
@@ -32,23 +31,23 @@ router
  *          description: Limit the number of items in each page. Default is 30
  *      responses:
  *        "200":
- *          description: Got the artworkAssets
+ *          description: Got the ArtworkApproval
  *          content:
  *            application/json:
  *              schema:
  *                type: "array"
  *                items:
- *                  $ref: '#/components/schemas/ArtworkAsset'
+ *                  $ref: '#/components/schemas/ArtworkApproval'
  */
 
 /**
  * @openapi
- *  /artwork-asset:
+ *  /artwork-approval:
  *    post:
- *      summary: Creates ArtworkAsset
- *      tags: [ArtworkAsset]
+ *      summary: Creates ArtworkApproval
+ *      tags: [ArtworkApproval]
  *      security:
- *          - BearerAuth: []           
+ *          - BearerAuth: []       
  *      requestBody:
  *        required: true
  *        content:
@@ -56,22 +55,11 @@ router
  *            schema:
  *              type: object
  *              required:
- *                  - address
- *                  - description
- *                  - assetType
+ *                  - UserId
  *                  - ArtworkId
  *              properties:
- *                  description:
- *                      type: string
- *                  address:
- *                      type: string
- *                  approved:
- *                      type: boolean
- *                  approvedDate:
- *                      type: string
- *                      format: date-time
- *                  visible:
- *                      type: boolean
+ *                  UserId:
+ *                      type: integer
  *                  ArtworkId:
  *                      type: integer
  *      responses:
@@ -80,15 +68,17 @@ router
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/ArtworkAsset'
+ *                $ref: '#/components/schemas/ArtworkApproval'
  */
 
 /**
  * @openapi
- *  /artwork-asset/{id}:
+ * /artwork-approval/{id}:
  *    get:
  *      summary: Gets a artworkAsset by id
- *      tags: [ArtworkAsset]
+ *      tags: [ArtworkApproval]
+ *      security:
+ *          - BearerAuth: []
  *      parameters:
  *          - name: "id"
  *            in: "path"
@@ -102,22 +92,22 @@ router
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/ArtworkAsset'
+ *                $ref: '#/components/schemas/ArtworkApproval'
  */
 
 
 /**
  * @openapi
- *  /artwork-asset/{id}:
+ * /artwork-approval/{id}:
  *    put:
- *      summary: Updates the artworkAsset
- *      tags: [ArtworkAsset]
+ *      summary: Updates the ArtworkApproval
+ *      tags: [ArtworkApproval]
  *      security:
  *          - BearerAuth: []
  *      parameters:
  *          - name: "id"
  *            in: "path"
- *            description: "Id of artworkAsset"
+ *            description: "Id of ArtworkApproval"
  *            required: true
  *            type: "integer"
  *            format: "int64"          
@@ -152,21 +142,21 @@ router
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/ArtworkAsset'
+ *                $ref: '#/components/schemas/ArtworkApproval'
  */
 
 /**
  * @openapi
- *  /artwork-asset/{id}:
+ * /artwork-approval/{id}:
  *    delete:
  *      summary: Deletes a artworkAsset by id
  *      security:
  *          - BearerAuth: []
- *      tags: [ArtworkAsset]
+ *      tags: [ArtworkApproval]
  *      parameters:
  *          - name: "id"
  *            in: "path"
- *            description: "Id of artworkAsset"
+ *            description: "Id of ArtworkApproval"
  *            required: true
  *            type: "integer"
  *            format: "int64"
@@ -176,26 +166,24 @@ router
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/ArtworkAsset'
+ *                $ref: '#/components/schemas/ArtworkApproval'
  */
 
 
 router.route('/:id')
-    .get(artworkAssetCtrl.get)
-    /** PUT /api/users/:userId - Update user */
-    .put(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkAssetCtrl.update)
-    /** DELETE /api/users/:userId - Delete user */
-    .delete(authorize([Role.Admin, Role.SuperAdmin]), artworkAssetCtrl.remove);
+    .get(artworkApprovalCtrl.get)
+    .put(authorize([Role.Admin, Role.SuperAdmin]), artworkApprovalCtrl.update)
+    .delete(authorize([Role.Admin, Role.SuperAdmin]), artworkApprovalCtrl.remove);
 
 
 
 
 /**
  * @openapi
- *  /artwork-asset/artwork/{id}:
+ *  /artwork-approval/artwork/{id}:
  *    get:
  *      summary: Gets a artworkAsset by artwork id
- *      tags: [ArtworkAsset]
+ *      tags: [ArtworkApproval]
  *      parameters:
  *          - name: "id"
  *            in: "path"
@@ -214,7 +202,7 @@ router.route('/:id')
 
 
 router.route('/artwork/:id')
-    .get(artworkAssetCtrl.getByArtworkId)
+    .get(artworkApprovalCtrl.getByArtworkId)
 
 
 module.exports = router;

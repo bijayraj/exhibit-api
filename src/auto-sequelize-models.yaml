@@ -1,5 +1,61 @@
 components:
     schemas:
+        ArtworkApproval:
+            type: object
+            properties:
+                id:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                approvedBy:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                approvedDate:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                rejected:
+                    type:
+                        - boolean
+                        - 'null'
+                comment:
+                    type:
+                        - string
+                        - 'null'
+                emailNotified:
+                    type:
+                        - boolean
+                        - 'null'
+                additionalEmailMessage:
+                    type:
+                        - string
+                        - 'null'
+                resolved:
+                    type:
+                        - boolean
+                        - 'null'
+                resolveRequest:
+                    type:
+                        - integer
+                        - 'null'
+                    format: int32
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                Artwork:
+                    $ref: '#/components/schemas/Artwork'
+                User:
+                    $ref: '#/components/schemas/User'
+            required:
+                - created_at
+                - updated_at
         ArtworkAsset:
             type: object
             properties:
@@ -137,6 +193,10 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/ArtworkAsset'
+                ArtworkApprovals:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ArtworkApproval'
             required:
                 - title
                 - description

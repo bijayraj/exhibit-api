@@ -1,5 +1,73 @@
 {
     "tables": {
+        "artwork_approvals": {
+            "tableName": "artwork_approvals",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "approvedBy": {
+                    "field": "approved_by",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "approvedDate": {
+                    "field": "approved_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "rejected": {
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "rejected",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "comment": {
+                    "field": "comment",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "emailNotified": {
+                    "field": "email_notified",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "additionalEmailMessage": {
+                    "field": "additional_email_message",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "resolved": {
+                    "field": "resolved",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "resolveRequest": {
+                    "field": "resolve_request",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "ArtworkId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "artworks",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "artwork_id",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
         "artwork_assets": {
             "tableName": "artwork_assets",
             "schema": {
@@ -61,6 +129,14 @@
                 "longDescription": {
                     "field": "long_description",
                     "seqType": "Sequelize.TEXT"
+                },
+                "onlyInHeadphone": {
+                    "field": "only_in_headphone",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "approvedBy": {
+                    "field": "approved_by",
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "created_at": {
                     "allowNull": false,
@@ -127,6 +203,14 @@
                 "approvedDate": {
                     "field": "approved_date",
                     "seqType": "Sequelize.DATE"
+                },
+                "approvedBy": {
+                    "field": "approved_by",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "visible": {
+                    "field": "visible",
+                    "seqType": "Sequelize.BOOLEAN"
                 },
                 "created_at": {
                     "allowNull": false,
@@ -470,5 +554,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 4
 }
