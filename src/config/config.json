@@ -6,7 +6,8 @@
     "jwtSecret": "Apple ball cat",
     "swaggerApplicationName": "Tap Tag API - Dev",
     "baseApiPath": "/api/v1",
-    "fullApiPath": "http://170.187.152.5:3001/api/v1"
+    "fullApiPath": "http://170.187.152.5:3001/api/v1",
+    "webuiPath": "http://tag-touring.com"
   },
   "test": {
     "dialect": "sqlite",
@@ -21,7 +22,8 @@
         "require": true,
         "rejectUnauthorized": false
       }
-    }
+    },
+    "webuiPath": "http://tag-touring.com"
   },
   "development_local": {
     "dialect": "sqlite",
@@ -30,7 +32,8 @@
     "jwtSecret": "Apple ball cat",
     "swaggerApplicationName": "Tap Tag API - Test/Staging",
     "baseApiPath": "/api/v1",
-    "fullApiPath": "http://localhost:3001/api/v1"
+    "fullApiPath": "http://localhost:3001/api/v1",
+    "webuiPath": "http://localhost:4200"
   },
   "developments_old": {
     "use_env_variable": "DATABASE_URL",
