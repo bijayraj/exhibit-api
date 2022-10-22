@@ -38,6 +38,9 @@ class Artwork extends Sequelize.Model {
             approvedBy: {
                 type: DataTypes.INTEGER
             },
+            underReview: {
+                type: DataTypes.BOOLEAN
+            },
             visible: {
                 type: DataTypes.BOOLEAN
             }

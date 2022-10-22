@@ -52,7 +52,7 @@ async function sendApprovalRequestEmail(artwork, user) {
 
 }
 
-sendApprovalRequestEmail({ id: 1, title: 'Test title' }, { username: 'bijayraj' })
+// sendApprovalRequestEmail({ id: 1, title: 'Test title' }, { username: 'bijayraj' })
 
 // send({
 //     to: 'bijaybzzay@gmail.com',
@@ -61,4 +61,31 @@ sendApprovalRequestEmail({ id: 1, title: 'Test title' }, { username: 'bijayraj' 
 // });
 
 
-module.exports = send;
+async function sendUserCreationEmail(userInfo) {
+    const plainMsg = `Hi ${userInfo.firstName} ${userInfo.lastName},\n 
+    Welcome to Tap Touring. \n
+    New user has been created for your email address. Please use the following details to login: \n
+
+    Username: ${userInfo.username}
+    Password: ${userInfo.password}
+    `;
+
+    const msg = ` Hi ${userInfo.firstName} ${userInfo.lastName},
+    <br /> 
+    Welcome to Tap Touring. <br />
+    New user has been created for your email address. Please use the following details to login: <br />
+    <strong>Username: </strong> ${userInfo.username}
+    <strong>Password: </strong> ${userInfo.password}
+    `;
+    console.log(msg);
+    const emailResult = await send({
+        to: userInfo.username,
+        subject: 'Tap Touring: New User Created',
+        html: msg,
+        text: plainMsg
+    });
+    return emailResult;
+}
+
+
+module.exports = { sendUserCreationEmail, sendApprovalRequestEmail };

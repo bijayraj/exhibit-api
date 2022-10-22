@@ -5,6 +5,7 @@ const APIError = require('../helpers/APIError');
 const artworkService = require('../services/artwork.service');
 const Artwork = db.Artwork;
 const { Configuration, OpenAIApi } = require("openai");
+const role = require('../models/role');
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -15,6 +16,9 @@ class ArtworkController {
 
     async create(req, res) {
         try {
+            req.body.UserId = req.user.id;
+            req.body.approved = false;
+            req.body.visible = false;
             const dept = await new baseService(db.Artwork).create(req.body);
             // if (req.body.assets){
             //     req.body.assets.forEach(element => {
@@ -31,8 +35,16 @@ class ArtworkController {
     async list(req, res) {
         const page = req.query.page;
         const pageSize = req.query.pageSize;
-        const depts = await new baseService(db.Artwork).list(page, pageSize);
-        res.json(depts);
+
+        const user = req.user;
+        if (user.role == role.Admin || user.role == role.SuperAdmin) {
+            const depts = await new baseService(db.Artwork).list(page, pageSize);
+            res.json(depts);
+        } else {
+            const depts = await new baseService(db.Artwork).listOnlyOwn(user, page, pageSize);
+            res.json(depts);
+        }
+
     }
 
     async update(req, res) {

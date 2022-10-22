@@ -219,6 +219,10 @@
                     "field": "approved_by",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "underReview": {
+                    "field": "under_review",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
                 "visible": {
                     "field": "visible",
                     "seqType": "Sequelize.BOOLEAN"
@@ -551,6 +555,24 @@
                     "field": "reset_token_expiry",
                     "seqType": "Sequelize.DATE"
                 },
+                "firstLogin": {
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "first_login",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "activated": {
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "activated",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "activatedDate": {
+                    "field": "activated_date",
+                    "seqType": "Sequelize.DATE"
+                },
                 "created_at": {
                     "allowNull": false,
                     "field": "created_at",
@@ -565,5 +587,5 @@
             "indexes": []
         }
     },
-    "revision": 5
+    "revision": 7
 }

@@ -30,6 +30,21 @@ class BaseService {
         return obj;
     }
 
+    async listOnlyOwn(user, page, pageSize, include = []) {
+        const obj = await this.model.findAll({
+            where: {
+                UserId: user.id
+            },
+            include: include,
+            ...paginate({
+                page,
+                pageSize
+            })
+        });
+
+        return obj;
+    }
+
     async count() {
         return await this.dbModel.count();
     }
@@ -68,7 +83,7 @@ class BaseService {
         await mObj.destroy();
     }
 
-    async findByField(whereCondition){
+    async findByField(whereCondition) {
         const allObjs = await this.model.findAll({
             where: whereCondition
         })

@@ -11,6 +11,7 @@ class ArtworkAssetController {
 
     async create(req, res) {
         try {
+            req.body.UserId = req.user.id;
             const dept = await new baseService(db.ArtworkAsset).create(req.body);
             res.json(dept);
         } catch (exception) {

@@ -175,6 +175,10 @@ components:
                         - integer
                         - 'null'
                     format: int32
+                underReview:
+                    type:
+                        - boolean
+                        - 'null'
                 visible:
                     type:
                         - boolean
@@ -465,6 +469,19 @@ components:
                         - 'null'
                     maxLength: 255
                 resetTokenExpiry:
+                    type:
+                        - string
+                        - 'null'
+                    format: date-time
+                firstLogin:
+                    type:
+                        - boolean
+                        - 'null'
+                activated:
+                    type:
+                        - boolean
+                        - 'null'
+                activatedDate:
                     type:
                         - string
                         - 'null'

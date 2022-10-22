@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const Sequelize = require("sequelize");
 
 class User extends Sequelize.Model {
@@ -20,20 +21,20 @@ class User extends Sequelize.Model {
             memberId: {
                 type: DataTypes.INTEGER,
             },
-            firstName:{
+            firstName: {
                 type: DataTypes.STRING
             },
-            lastName:{
-                type:DataTypes.STRING
+            lastName: {
+                type: DataTypes.STRING
             },
-            organization:{
-                type:DataTypes.STRING
+            organization: {
+                type: DataTypes.STRING
             },
-            occupation:{
-                type:DataTypes.STRING
+            occupation: {
+                type: DataTypes.STRING
             },
-            photoUrl:{
-                type:DataTypes.STRING
+            photoUrl: {
+                type: DataTypes.STRING
             },
             role: DataTypes.STRING,
             verificationToken: {
@@ -48,6 +49,17 @@ class User extends Sequelize.Model {
                 type: DataTypes.DATE,
                 field: 'reset_token_expiry'
             },
+            firstLogin: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true
+            },
+            activated: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
+            activatedDate: {
+                type: DataTypes.DATE
+            }
 
         }, {
             sequelize,
@@ -61,7 +73,7 @@ class User extends Sequelize.Model {
     static associate(models) {
         this.hasMany(models.RefreshToken);
         this.hasMany(models.ExhibitAdmin);
-        this.belongsToMany(models.Exhibit, {through: models.ExhibitAdmin});
+        this.belongsToMany(models.Exhibit, { through: models.ExhibitAdmin });
         this.hasMany(models.Artwork);
         // or
         // this.myAssociation = models.MyModel.belongsTo(models.OtherModel);

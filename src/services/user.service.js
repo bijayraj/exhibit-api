@@ -42,8 +42,7 @@ class UserService {
 
     async register(params, origin) {
         // validate
-        if (!params.username)
-        {
+        if (!params.username) {
             params.username = params.email;
         }
         // console.log('REached here');
@@ -63,7 +62,10 @@ class UserService {
 
         // first registered account is an admin
         const isFirstAccount = (await db.User.count()) === 0;
-        user.role = isFirstAccount ? Role.Admin : Role.User;
+
+        // user.role = isFirstAccount ? Role.Admin : Role.User;
+        user.role = params.role;
+
         user.verificationToken = this.randomTokenString();
         // hash password
         user.password = this.hash(params.password);
@@ -110,6 +112,12 @@ class UserService {
             lastName,
             role
         };
+    }
+
+    basicDetailsWithoutUsername(user) {
+        const basicDetails = this.basicDetails(user);
+        delete basicDetails['username'];
+        return { ...basicDetails };
     }
 
     hash(password) {
@@ -168,10 +176,40 @@ class UserService {
     }
 
 
-    
- 
+    async getById(id) {
+        const user = await db.User.findByPk(id);
+        return {
+            ...this.basicDetails(user)
+        }
 
-    
+    }
+
+
+    async updateUser(id, params) {
+        console.log('THE ID IS...')
+        console.log(id);
+        const filteredParams = this.basicDetailsWithoutUsername(params);
+
+        const mObj = await db.User.update(params, {
+            returning: true,
+            plain: true,
+            where: {
+                id: id
+            }
+        });
+        console.log(mObj);
+        //Sends an array [updatedObj, no_of_rows updated]
+        return mObj;
+    }
+
+    async deleteUser(id, params) {
+
+    }
+
+
+
+
+
 
 }
 

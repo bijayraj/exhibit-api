@@ -23,6 +23,7 @@
     "express": "~4.16.1",
     "express-jwt": "^6.0.0",
     "express-validation": "^4.1.0",
+    "generate-password": "^1.7.0",
     "glob": "^7.1.6",
     "googleapis": "^105.0.0",
     "helmet": "^3.23.3",

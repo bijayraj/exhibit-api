@@ -8,7 +8,7 @@ const Role = require('../models/role')
 router
     .route('/')
     .get(artworkApprovalCtrl.list)
-    .post(artworkApprovalCtrl.create);
+    .post(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkApprovalCtrl.requestApproval);
 
 /**
  * @openapi
@@ -202,7 +202,81 @@ router.route('/:id')
 
 
 router.route('/artwork/:id')
-    .get(artworkApprovalCtrl.getByArtworkId)
+    .get(authorize([Role.Artist, Role.Admin, Role.SuperAdmin]), artworkApprovalCtrl.getByArtworkId)
+
+
+/**
+ * @openapi
+ *  /artwork-approval/{id}/{reject}:
+ *    post:
+ *      summary: Approve Artwork
+ *      tags: [ArtworkApproval]
+ *      security:
+ *          - BearerAuth: []       
+ *      parameters:
+ *          - name: "id"
+ *            in: "path"
+ *            description: "Id of artwork approval"
+ *            required: true
+ *            type: "integer"
+ *            format: "int64"
+ *          - name: "reject"
+ *            in: "path"
+ *            description: "Reject"
+ *            required: true
+ *            type: "integer"
+ *            format: "int64"
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                  comment:
+ *                      type: string
+ *      responses:
+ *        "200":
+ *          description: successful message is successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/ArtworkApproval'
+ */
+
+
+router.route('/approve/:id/:reject')
+    .post(authorize([Role.Admin, Role.SuperAdmin]), artworkApprovalCtrl.approveReject)
+
+
+
+
+/**
+ * @openapi
+ *  /artwork-approval/byresolution/{resolved}}:
+ *    get:
+ *      summary: Gets a artworkapprovals that are unresolved 
+ *      tags: [ArtworkApproval]
+ *      security:
+ *          - BearerAuth: []  
+ *      parameters:
+ *          - name: "resolved"
+ *            in: "path"
+ *            description: "Resolution 0 or 1"
+ *            required: true
+ *            type: "integer"
+ *            format: "int64"
+ *      responses:
+ *        "200":
+ *          description: successful message is successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/ArtworkApproval'
+ */
+
+router.route('/byresolution/:resolved')
+    .get(authorize([Role.Admin, Role.SuperAdmin]), artworkApprovalCtrl.getByResolution)
 
 
 module.exports = router;

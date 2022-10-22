@@ -64,6 +64,17 @@
                     "onUpdate": "CASCADE",
                     "field": "artwork_id",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "user_id",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -540,6 +551,24 @@
                     "field": "reset_token_expiry",
                     "seqType": "Sequelize.DATE"
                 },
+                "firstLogin": {
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "first_login",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "activated": {
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "activated",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "activatedDate": {
+                    "field": "activated_date",
+                    "seqType": "Sequelize.DATE"
+                },
                 "created_at": {
                     "allowNull": false,
                     "field": "created_at",
@@ -554,5 +583,5 @@
             "indexes": []
         }
     },
-    "revision": 4
+    "revision": 6
 }

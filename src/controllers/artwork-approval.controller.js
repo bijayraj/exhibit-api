@@ -4,14 +4,17 @@ const baseService = require('../services/base.service');
 const APIError = require('../helpers/APIError');
 const { PROXY_AUTHENTICATION_REQUIRED } = require('http-status');
 const ArtworkAsset = db.ArtworkAsset;
-const fs = require('fs')
+const fs = require('fs');
+const artworkApprovalService = require('../services/artwork-approval.service');
 const upload_dir = process.env.PORT || './uploads'
 
 class ArtworkApprovalController {
 
     async create(req, res) {
         console.log('Reached here now');
+        const user = req.user;
         try {
+            req.body.UserId = user.id;
             const dept = await new baseService(db.ArtworkApproval).create(req.body);
             res.json(dept);
         } catch (exception) {
@@ -21,7 +24,8 @@ class ArtworkApprovalController {
 
     async requestApproval(req, res) {
         try {
-            const dept = await new baseService(db.ArtworkApproval).create(req.body);
+            req.body.UserId = req.user.id;
+            const dept = await artworkApprovalService.requestApproval(req.body);
             res.json(dept);
         } catch (exception) {
             throw exception
@@ -53,8 +57,26 @@ class ArtworkApprovalController {
     }
 
     async getByArtworkId(req, res) {
-        const dept = await new baseService(db.ArtworkApproval).findByField({ ArtworkId: req.params.id });
+        const dept = await db.ArtworkApproval.findOne({
+            where: { ArtworkId: req.params.id },
+            order: [['id', 'DESC']],
+        });
         res.json(dept);
+    }
+
+    async getByResolution(req, res) {
+        const page = req.query.page;
+        const pageSize = req.query.pageSize;
+        const byResolution = req.params.resolved;
+        const depts = await artworkApprovalService.getListByResolution(byResolution == 1, page, pageSize);
+        res.json(depts);
+
+    }
+
+    async approveReject(req, res) {
+        const user = req.user;
+        const approveResult = await artworkApprovalService.approveArtwork(req.params.id, user, req.params.reject == 1, req.body.comment);
+        res.json({ message: 'Approval/Rejection complete' })
     }
 }
 

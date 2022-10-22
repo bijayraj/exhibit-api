@@ -2,7 +2,9 @@ const httpStatus = require('http-status');
 const db = require('../database/sequelize');
 const userService = require('../services/user.service');
 const User = db.User;
-
+const crypto = require('crypto');
+const pwdGenerator = require('generate-password');
+const emailSender = require('../helpers/emailer_old')
 class UserController {
     /**
      * Load user and append to req.
@@ -40,6 +42,40 @@ class UserController {
     }
 
 
+
+    registerNew(req, res) {
+        console.log('Registering user');
+        const newPassword = pwdGenerator.generate({
+            length: 10,
+            numbers: true
+        }); //'admin@123';//generatePassword(length = 8);
+        const userInfo = req.body;
+        userInfo.password = newPassword;
+        userService.register(userInfo, req.get('origin'))
+            .then(() => {
+                emailSender.sendUserCreationEmail(userInfo);
+                res.json({
+                    message: 'Registration successful, please check your email for verification instructions'
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+
+
+    async getById(req, res) {
+        const user = await userService.getById(req.params.id);
+        res.json(user);
+    }
+
+    async updateById(req, res) {
+        const user = await userService.updateUser(req.params.userId, req.body);
+        res.json(user);
+    }
+
+
     /**
      * Update existing user
      * @property {string} req.body.username - The username of user.
@@ -67,8 +103,8 @@ class UserController {
             limit = 50
         } = req.query;
         User.findAll({
-                limit
-            })
+            limit
+        })
             .then(users => res.json(users))
             .catch(e => next(e));
     }
@@ -77,13 +113,20 @@ class UserController {
      * Delete user.
      * @returns {User}
      */
-    remove(req, res, next) {
-        const user = req.user;
-        const username = req.user.username;
-        user
-            .destroy()
-            .then(() => res.json(username))
-            .catch(e => next(e));
+    // remove(req, res, next) {
+    //     const user = req.user;
+    //     const username = req.user.username;
+    //     user
+    //         .destroy()
+    //         .then(() => res.json(username))
+    //         .catch(e => next(e));
+    // }
+
+    async remove(req, res) {
+        const dept = await userService.delete(req.params.id);
+        res.json({
+            message: `Object with id ${req.params.id} deleted!`
+        });
     }
 
 

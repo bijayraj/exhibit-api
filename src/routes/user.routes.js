@@ -12,7 +12,7 @@ router
     /** GET /api/users - Get list of users */
     .get(authorize(Role.SuperAdmin), userCtrl.list)
     /** POST /api/users - Create new user */
-    .post(userCtrl.create);
+    .post(userCtrl.registerNew);
 
 
 /**
@@ -94,11 +94,36 @@ router
 router.route('/:userId')
     .get(authorize(Role.SuperAdmin), userCtrl.get)
     /** PUT /api/users/:userId - Update user */
-    .put(authorize(Role.SuperAdmin), userCtrl.update)
+    .put(authorize(Role.SuperAdmin), userCtrl.updateById)
     /** DELETE /api/users/:userId - Delete user */
     .delete(authorize(Role.SuperAdmin), userCtrl.remove);
 
 
+/**
+ * @openapi
+ *  /user/getone/{id}:
+ *    get:
+ *      summary: Gets a user by id
+ *      security:
+ *          - BearerAuth: []
+ *      tags: [User]
+ *      parameters:
+ *          - name: "userId"
+ *            in: "path"
+ *            description: "Id of user to return"
+ *            required: true
+ *            type: "integer"
+ *            format: "int64"
+ *      responses:
+ *        "200":
+ *          description: successful message is successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ */
+router.route('/getone/:id')
+    .get(authorize(Role.SuperAdmin), userCtrl.getById);
 
 /** Load user when API with userId route parameter is hit */
 router.param('userId', userCtrl.load);
