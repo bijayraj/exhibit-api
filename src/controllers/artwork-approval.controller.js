@@ -6,6 +6,8 @@ const { PROXY_AUTHENTICATION_REQUIRED } = require('http-status');
 const ArtworkAsset = db.ArtworkAsset;
 const fs = require('fs');
 const artworkApprovalService = require('../services/artwork-approval.service');
+const artworkService = require('../services/artwork.service');
+const { sendApprovalRequestEmail } = require('../helpers/emailer_old');
 const upload_dir = process.env.PORT || './uploads'
 
 class ArtworkApprovalController {
@@ -26,6 +28,8 @@ class ArtworkApprovalController {
         try {
             req.body.UserId = req.user.id;
             const dept = await artworkApprovalService.requestApproval(req.body);
+            const artwork = await db.Artwork.findByPk(req.body.ArtworkId);
+            sendApprovalRequestEmail(artwork, req.user).then(f => console.log(f));
             res.json(dept);
         } catch (exception) {
             throw exception

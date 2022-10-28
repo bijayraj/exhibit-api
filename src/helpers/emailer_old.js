@@ -2,7 +2,8 @@
 
 const nodemailer = require('nodemailer');
 const config = require('../config');
-const auth = require('../config/email.json')
+const auth = require('../config/email.json');
+const userService = require('../services/user.service')
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -22,7 +23,16 @@ async function send(message) {
 
 
 async function sendApprovalRequestEmail(artwork, user) {
-    const artworkLink = `${config.webuiPath}/artwork/${artwork.id}`;
+    const allAdminEmails = await userService.getAdmins();
+    // console.log(allAdminEmails);
+    let emailList = [];
+    allAdminEmails.forEach(element => {
+        emailList.push(element.dataValues.username)
+    });
+
+    const emailListString = emailList.join(',');
+    console.log(emailListString);
+    const artworkLink = `${config.webuiPath}/edit/${artwork.id}`;
 
     const plainMsg = `Hello,${user.username} is requesting to review the entry "${artwork.title}". 
 
@@ -39,14 +49,14 @@ async function sendApprovalRequestEmail(artwork, user) {
     <a href="${artworkLink}">${artworkLink}</a>
 
     <br />
-    If the link is not clicable, copy and paste the above link in the browser.
+    If the link is not clickable, copy and paste the above link in the browser.
     `;
-    console.log(msg);
+
     const emailResult = await send({
-        to: 'bijaybzzay@gmail.com',
-        subject: 'Tap Tour: Approval Requst',
+        to: emailListString,
+        subject: 'Tap Touring: Approval Requst',
         html: msg,
-        text: msg
+        text: plainMsg
     });
     console.log(emailResult)
 

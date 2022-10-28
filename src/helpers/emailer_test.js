@@ -7,5 +7,14 @@ let userInfo = {
     password: 'testPassword'
 
 }
-let result = sendUserCreationEmail(userInfo)
-console.log(result)
+
+let artWork = {
+    id: 1,
+    title: 'Some title'
+}
+
+
+// let result = sendUserCreationEmail(userInfo)
+// console.log(result)
+
+let result = sendApprovalRequestEmail(artWork, userInfo);

@@ -206,6 +206,15 @@ class UserService {
 
     }
 
+    async getAdmins() {
+        const admins = db.User.findAll({
+            attributes: ['username'],
+            where: {
+                role: 'Admin'
+            }
+        });
+        return admins
+    }
 
 
 
