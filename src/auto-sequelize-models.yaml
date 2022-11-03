@@ -133,6 +133,44 @@ components:
                 - assetType
                 - created_at
                 - updated_at
+        ArtworkTag:
+            type: object
+            properties:
+                uuid:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                active:
+                    type:
+                        - boolean
+                        - 'null'
+                location:
+                    type:
+                        - string
+                        - 'null'
+                    maxLength: 255
+                description:
+                    type:
+                        - string
+                        - 'null'
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                User:
+                    $ref: '#/components/schemas/User'
+                Artwork:
+                    $ref: '#/components/schemas/Artwork'
+                ArtworkApprovals:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ArtworkApproval'
+            required:
+                - created_at
+                - updated_at
         Artwork:
             type: object
             properties:

@@ -255,4 +255,29 @@ router.route('/user/:id')
 router.route('/question/:id')
     .post(artworkCtrl.askQuestion)
 
+
+
+/**
+* @openapi
+*  /artwork/tag/{id}:
+*    get:
+*      summary: Gets a artwork by by tag id
+*      tags: [Artwork]
+*      parameters:
+*          - name: "id"
+*            in: "path"
+*            description: "Tag Id"
+*            required: true
+*            type: "string"
+*      responses:
+*        "200":
+*          description: successful message is successful
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/Artwork'
+*/
+router.route('/tag/:id')
+    .get(artworkCtrl.getByTagId)
+
 module.exports = router;

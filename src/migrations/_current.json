@@ -75,6 +75,17 @@
                     "onUpdate": "CASCADE",
                     "field": "user_id",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "ArtworkTagId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "artwork_tags",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "artwork_tag_id",
+                    "seqType": "Sequelize.STRING"
                 }
             },
             "indexes": []
@@ -158,6 +169,64 @@
                     "allowNull": false,
                     "field": "updated_at",
                     "seqType": "Sequelize.DATE"
+                },
+                "ArtworkId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "artworks",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "artwork_id",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "artwork_tags": {
+            "tableName": "artwork_tags",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.STRING"
+                },
+                "active": {
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "active",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "location": {
+                    "field": "location",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "field": "description",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "user_id",
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "ArtworkId": {
                     "allowNull": true,
@@ -587,5 +656,5 @@
             "indexes": []
         }
     },
-    "revision": 7
+    "revision": 9
 }

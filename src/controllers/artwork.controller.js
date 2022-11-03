@@ -71,6 +71,18 @@ class ArtworkController {
         res.json(depts);
     }
 
+    async getByTagId(req, res) {
+        const dept = await artworkService.getByTagId(req.params.id);
+        if (dept) {
+            res.json(dept);
+
+        }
+        else {
+            res.status(400);
+            res.send('Record not found');
+        }
+    }
+
 
     async askQuestion(req, res) {
         const id = req.params.id;
@@ -105,6 +117,8 @@ class ArtworkController {
             });
 
         }
+
+
 
 
 

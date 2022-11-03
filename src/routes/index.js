@@ -7,5 +7,6 @@ module.exports = function (app) {
     app.use('/api/v1/artwork', require('./artwork.routes'));
     app.use('/api/v1/artwork-asset', require('./artwork-asset.routes'));
     app.use('/api/v1/artwork-approval', require('./artwork-approval.routes'));
+    app.use('/api/v1/artwork-tag', require('./artwork-tag.routes'));
 
 }

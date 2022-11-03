@@ -42,6 +42,26 @@ class ArtworkService extends BaseService {
         return obj;
     }
 
+    async getByTagId(id) {
+        console.log(id)
+        const artworkTag = await db.ArtworkTag.findOne({
+            where: {
+                uuid: id
+            }
+        });
+        if (artworkTag) {
+            const artwork = await db.Artwork.findOne({
+                where: {
+                    id: artworkTag.dataValues.ArtworkId,
+                    approved: true,
+                }
+            });
+            return artwork;
+        }
+        return null;
+
+    }
+
 }
 
 module.exports = new ArtworkService()
