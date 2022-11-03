@@ -247,6 +247,39 @@ class UserService {
     }
 
 
+    async resetForgottenPassword(token, newpassword) {
+        try {
+            const decoded = jwt.verify(token, config.jwtSecret);
+            const userId = decoded.id;
+            const userInfo = await db.User.findOne({
+                where: {
+                    id: userId,
+                    resetToken: token
+                },
+                raw: true
+            });
+            if (userInfo && userInfo.resetToken != '') {
+                const newHasedPass = this.hash(newpassword)
+                const mObj = await db.User.update({ password: newHasedPass, resetToken: '' }, {
+                    returning: true,
+                    plain: true,
+                    where: {
+                        id: userInfo.id
+                    }
+                });
+
+                return { status: true, mObj };
+            }
+
+        } catch (err) {
+            // err
+            return { status: false, message: err };
+        }
+
+
+    }
+
+
 
 
 }

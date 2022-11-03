@@ -78,6 +78,20 @@ class AuthController {
         res.json(result)
     }
 
+    async resetForgottenPassword(req, res) {
+        const token = req.body.token;
+        const password = req.body.password;
+        const result = await userService.resetForgottenPassword(token, password);
+        if (result.status) {
+            res.json(result);
+
+        } else {
+            return res.status(400).json({
+                message: 'Token is invalid'
+            });
+        }
+    }
+
 
 }
 

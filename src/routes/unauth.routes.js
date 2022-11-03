@@ -138,4 +138,35 @@ unauth.post('/revoke-token', authorize(), authController.revokeToken);
 */
 unauth.get('/forgot-password/:username', authController.forgotPassword);
 
+
+
+/**
+ * @openapi
+ *  /reset-password:
+ *    post:
+ *      summary: Reset password
+ *      tags: [Login]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                  - password
+ *                  - repassword
+ *              properties:
+ *                  resetToken:
+ *                      type: string
+ *      responses:
+ *        "200":
+ *          description: Jwt and user info if successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ */
+unauth.post('/forgot-password', authController.resetForgottenPassword);
+
+
 module.exports = unauth
