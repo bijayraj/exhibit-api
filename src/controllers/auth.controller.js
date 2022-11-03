@@ -14,7 +14,7 @@ class AuthController {
         const ipAddress = req.ip || req.headers['x-real-ip'] || req.connection.remoteAddress;
 
         try {
-            const userInfo = await userService.authenticate(username, password, ipAddress);
+            const userInfo = await userService.authenticate(username.toLowerCase(), password, ipAddress);
             res.json(userInfo)
         } catch (exception) {
             return next(exception);

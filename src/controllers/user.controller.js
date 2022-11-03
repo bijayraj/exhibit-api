@@ -50,6 +50,7 @@ class UserController {
             numbers: true
         }); //'admin@123';//generatePassword(length = 8);
         const userInfo = req.body;
+        userInfo.username = userInfo.username.toLowerCase();
         userInfo.password = newPassword;
         userService.register(userInfo, req.get('origin'))
             .then(() => {
