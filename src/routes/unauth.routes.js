@@ -116,4 +116,26 @@ unauth.post('/refresh-token', authController.refreshToken);
 
 unauth.post('/revoke-token', authorize(), authController.revokeToken);
 
+/**
+* @openapi
+*  /forgot-password/{username}:
+*    get:
+*      summary: Forgot password endpoint
+*      tags: [Login]
+*      parameters:
+*          - name: "username"
+*            in: "path"
+*            description: "Username"
+*            required: true
+*            type: "string"
+*      responses:
+*        "200":
+*          description: successful message is successful
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/Artwork'
+*/
+unauth.get('/forgot-password/:username', authController.forgotPassword);
+
 module.exports = unauth

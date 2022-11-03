@@ -4,6 +4,7 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 const config = require('../config');
 const userService = require('../services/user.service');
+const { sendForgotPasswordEmail } = require('../helpers/emailer_basic');
 
 class AuthController {
     async login(req, res, next) {
@@ -59,6 +60,22 @@ class AuthController {
                 message: 'Token revoked'
             }))
             .catch(next);
+    }
+
+    async forgotPassword(req, res) {
+        const username = req.params.username;
+        console.log('Searching with username');
+        console.log(username);
+        const userInfo = await userService.getByUserName(username.toLowerCase());
+        console.log('found user info')
+        console.log(userInfo);
+
+        let result = { success: true }
+
+        if (userInfo) {
+            result = await userService.forgotPassword(userInfo);
+        }
+        res.json(result)
     }
 
 

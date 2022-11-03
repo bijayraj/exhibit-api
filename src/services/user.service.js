@@ -6,7 +6,8 @@ const db = require('../database/sequelize');
 const Role = require('../models/role');
 const APIError = require('../helpers/APIError');
 const { execArgv } = require('process');
-
+const { send } = require('../helpers/emailer_basic');
+const sendEmail = require('../helpers/emailer_basic');
 
 class UserService {
     async authenticate(
@@ -216,6 +217,34 @@ class UserService {
         return admins
     }
 
+    async getByUserName(uName) {
+        const user = await db.User.findOne({
+            where: {
+                username: uName
+            },
+            raw: true
+        });
+        return user;
+    }
+
+    async forgotPassword(userInfo) {
+        const token = jwt.sign({
+            id: userInfo.id,
+            type: 'reset'
+        }, config.jwtSecret, {
+            expiresIn: '60m'
+        });
+
+        const mObj = await db.User.update({ resetToken: token }, {
+            returning: true,
+            plain: true,
+            where: {
+                id: userInfo.id
+            }
+        });
+        userInfo.resetToken = token
+        sendEmail.sendForgotPasswordEmail(userInfo);
+    }
 
 
 
