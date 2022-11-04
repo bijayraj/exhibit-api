@@ -12,13 +12,59 @@ class ArtworkService extends BaseService {
         super(db.Artwork);
     }
 
+    async list(page, pageSize, include = ['User']) {
+        const obj = await db.Artwork.findAll({
+            include: include,
+            attributes: {
+                include: [[db.sequelize.literal(`(
+                SELECT COUNT(artwork_tags.uuid)
+                FROM artwork_tags
+                WHERE artwork_tags.artwork_id = artwork.id
+              )`),
+                    'tagCount',]]
+            },
+            ...paginate({
+                page,
+                pageSize
+            })
+        });
+
+        return obj;
+
+    }
+
+
+    async listOnlyOwn(user, page, pageSize, include = []) {
+
+        const obj = await db.Artwork.findAll({
+            where: {
+                UserId: user.id
+            },
+            include: include,
+            attributes: {
+                include: [[db.sequelize.literal(`(
+                SELECT COUNT(artwork_tags.uuid)
+                FROM artwork_tags
+                WHERE artwork_tags.artwork_id = artwork.id
+              )`),
+                    'tagCount',]]
+            },
+            ...paginate({
+                page,
+                pageSize
+            })
+        });
+
+        return obj;
+    }
+
     async getByUserId(id, page, pageSize) {
 
         const obj = await this.model.findAll({
             where: {
                 user_id: id
             },
-            include: [db.Exhibit, db.ArtworkAsset],
+            include: [db.Exhibit, db.ArtworkAsset, db.User],
             ...paginate({
                 page,
                 pageSize

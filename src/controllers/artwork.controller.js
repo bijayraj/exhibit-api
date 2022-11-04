@@ -38,10 +38,11 @@ class ArtworkController {
 
         const user = req.user;
         if (user.role == role.Admin || user.role == role.SuperAdmin) {
-            const depts = await new baseService(db.Artwork).list(page, pageSize);
+            const depts = await artworkService.list(page, pageSize, ["User"]);
             res.json(depts);
         } else {
-            const depts = await new baseService(db.Artwork).listOnlyOwn(user, page, pageSize);
+
+            const depts = await artworkService.listOnlyOwn(user, page, pageSize, ["User"]);
             res.json(depts);
         }
 
