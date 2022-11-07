@@ -3,6 +3,7 @@ const db = require('../database/sequelize');
 const {
     paginate
 } = require('../helpers/dbUtils');
+const md5File = require('md5-file')
 
 
 
@@ -32,7 +33,6 @@ class ArtworkService extends BaseService {
         return obj;
 
     }
-
 
     async listOnlyOwn(user, page, pageSize, include = []) {
 
@@ -106,6 +106,13 @@ class ArtworkService extends BaseService {
         }
         return null;
 
+    }
+
+    async getTagMd5() {
+        // /* Async usage */
+        md5File('LICENSE.md').then((hash) => {
+            console.log(`The MD5 sum of LICENSE.md is: ${hash}`);
+        })
     }
 
 }

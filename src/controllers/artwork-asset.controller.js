@@ -7,6 +7,7 @@ const ArtworkAsset = db.ArtworkAsset;
 const fs = require('fs')
 const upload_dir = process.env.PORT || './uploads'
 
+
 class ArtworkAssetController {
 
     async create(req, res) {
@@ -87,6 +88,12 @@ class ArtworkAssetController {
     async getByArtworkId(req, res) {
         const dept = await new baseService(db.ArtworkAsset).findByField({ ArtworkId: req.params.id });
         res.json(dept);
+    }
+
+    async getMD5Hash(req, res) {
+
+        res.json()
+
     }
 }
 
