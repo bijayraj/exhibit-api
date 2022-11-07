@@ -13,7 +13,7 @@ class ArtworkTagService extends BaseService {
     }
 
     async update(id, params) {
-        const mObj = await this.model.update(params, {
+        const mObj = await db.ArtworkTag.update(params, {
             returning: true,
             plain: true,
             where: {
@@ -24,8 +24,11 @@ class ArtworkTagService extends BaseService {
     }
 
     async upsert(params) {
-        const mObj = await this.model.upsert(params);
+
+
+        const mObj = await db.ArtworkTag.upsert(params);
         return mObj;
+
     }
 
     async getByUserId(id, page, pageSize) {
@@ -48,6 +51,15 @@ class ArtworkTagService extends BaseService {
         const artwork = db.Artwork.fingByPk(artworkTag.ArtworkId);
         return artwork;
     }
+
+    // async create(params) {
+    //     try {
+    //         const mObj = await this.model.create(params);
+    //         return mObj;
+    //     } catch (exception) {
+    //         throw exception;
+    //     }
+    // }
 
 }
 

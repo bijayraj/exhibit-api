@@ -14,7 +14,8 @@ class ArtworkTagController {
     async create(req, res) {
         try {
             req.body.UserId = req.user.id;
-            const dept = await new baseService(db.ArtworkTag).create(req.body);
+            // const dept = await new baseService(db.ArtworkTag).create(req.body);
+            const dept = await artworkTagService.upsert(req.body);
             res.json(dept);
         } catch (exception) {
             throw exception
